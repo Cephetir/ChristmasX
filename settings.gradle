@@ -14,6 +14,8 @@ pluginManagement {
             name = "Jitpack"
             url = "https://jitpack.io/"
         }
+
+        maven { url = "https://repo.spongepowered.org/maven" }
     }
     resolutionStrategy {
         eachPlugin {
@@ -21,8 +23,11 @@ pluginManagement {
             if (requested.id.id == "net.minecraftforge.gradle.forge") {
                 useModule("com.github.asbyth:ForgeGradle:${requested.version}")
             }
+            if (requested.id.id == "org.spongepowered.mixin") {
+                useModule("com.github.LxGaming:MixinGradle:${requested.version}")
+            }
         }
     }
 }
 
-rootProject.name = "ForgeTemplate"
+rootProject.name = "V0ID"

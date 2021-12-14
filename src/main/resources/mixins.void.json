@@ -1,0 +1,10 @@
+{
+  "package": "wtf.cephetir.voidmenu.mixins",
+  "refmap": "mixins.void.refmap.json",
+  "compatibilityLevel": "JAVA_8",
+  "client": [
+    "MixinMinecraft",
+    "IMixinTextureManagerAccessor",
+    "MixinSplashProgress"
+  ]
+}
