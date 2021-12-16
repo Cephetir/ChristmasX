@@ -6,6 +6,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import wtf.cephetir.christmasx.config.ChristmasConfig;
+import wtf.cephetir.christmasx.gui.mainmenu.comp.particles.ParticleGenerator;
 
 @Mod(modid = "christmasx", name = "ChristmasX", version = "1.0")
 public class ChristmasX {
@@ -14,6 +15,7 @@ public class ChristmasX {
     private final Minecraft mc = Minecraft.getMinecraft();
     public Logger logger;
     public ChristmasConfig config;
+    public ParticleGenerator particleGenerator;
 
     @Mod.EventHandler
     public void onInit(FMLPreInitializationEvent event) {

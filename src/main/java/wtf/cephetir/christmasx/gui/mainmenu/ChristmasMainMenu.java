@@ -18,7 +18,6 @@ import java.awt.*;
 public class ChristmasMainMenu extends GuiScreen {
     private int right = 0;
     private ResourceLocation bg;
-    private ParticleGenerator particleGenerator;
     private final ResourceLocation minecraftTitleTextures = new ResourceLocation("textures/gui/title/minecraft.png");
 
     @Override
@@ -71,9 +70,9 @@ public class ChristmasMainMenu extends GuiScreen {
         this.drawTexturedModalRect(j + 155 - 480, k + 100, 0, 45, 155, 44);
         GlStateManager.scale(1.4285714286, 1.4285714286, 1.4285714286);
 
-        particleGenerator.breite = width;
-        particleGenerator.höhe = height;
-        particleGenerator.drawParticles();
+        ChristmasX.getInstance().particleGenerator.breite = width;
+        ChristmasX.getInstance().particleGenerator.höhe = height;
+        ChristmasX.getInstance().particleGenerator.drawParticles();
 
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
@@ -104,14 +103,12 @@ public class ChristmasMainMenu extends GuiScreen {
         this.customButtonList.add(new CustomButton("mp", 10, height / 2 - 30, 200, 20, "Multiplayer", new Color(255, 255, 255, 255), new Color(255, 255, 255, 94), new Color(243, 100, 100, 255), new Color(208, 59, 59, 255)));
         this.customButtonList.add(new CustomButton("st", 10, height / 2 - 0, 200, 20, "Settings", new Color(255, 255, 255, 255), new Color(255, 255, 255, 94), new Color(243, 100, 100, 255), new Color(208, 59, 59, 255)));
         this.customButtonList.add(new CustomButton("q", 10, height / 2 + 30, 200, 20, "Quit", new Color(255, 255, 255, 255), new Color(255, 255, 255, 94), new Color(243, 100, 100, 255), new Color(208, 59, 59, 255)));
-        this.customButtonList.add(new CustomButton("chbg", 30, height - (fontRendererObj.FONT_HEIGHT + 13), fontRendererObj.getStringWidth("Change background") + 16, fontRendererObj.FONT_HEIGHT + 8, "Change background", new Color(243, 100, 100, 255), new Color(255, 255, 255, 94), new Color(243, 100, 100, 255), new Color(255, 255, 255, 94)));
-        this.customButtonList.add(new CustomButton("chbg+", 30 + fontRendererObj.getStringWidth("Change background") + 16 + 5, height - (fontRendererObj.FONT_HEIGHT + 13), fontRendererObj.getStringWidth("→") + 16, fontRendererObj.FONT_HEIGHT + 8, "→", new Color(255, 255, 255, 255), new Color(255, 255, 255, 94), new Color(243, 100, 100, 255), new Color(208, 59, 59, 255)));
-        this.customButtonList.add(new CustomButton("chbg-", 30 - 5 - (fontRendererObj.getStringWidth("←") + 16), height - (fontRendererObj.FONT_HEIGHT + 13), fontRendererObj.getStringWidth("←") + 16, fontRendererObj.FONT_HEIGHT + 8, "←", new Color(255, 255, 255, 255), new Color(255, 255, 255, 94), new Color(243, 100, 100, 255), new Color(208, 59, 59, 255)));
+        this.customButtonList.add(new CustomButton("chbg", 10, height - (fontRendererObj.FONT_HEIGHT + 13), 200, 20, "Customize", new Color(255, 255, 255, 255), new Color(255, 255, 255, 94), new Color(243, 100, 100, 255), new Color(208, 59, 59, 255)));
         anim();
         //ffmpeg -i "C:\Program Files (x86)\Steam\steamapps\workshop\content\431960\2351726596\TopoDesktop.mp4" -pix_fmt rgba "D:\mod\1VoidClient\src\main\resources\assets\minecraft\void\bg\%01d.png"
         if(ChristmasX.getInstance().config.bg>8) bg = new ResourceLocation("void/bg/" + ChristmasX.getInstance().config.bg + ".png");
         else bg = new ResourceLocation("void/bg/" + ChristmasX.getInstance().config.bg + ".jpg");
-        particleGenerator = new ParticleGenerator(150, width, height);
+        ChristmasX.getInstance().particleGenerator = new ParticleGenerator(150, width, height, 2, 2);
         super.initGui();
     }
 
@@ -130,17 +127,8 @@ public class ChristmasMainMenu extends GuiScreen {
             case "q":
                 mc.shutdown();
                 break;
-            case "chbg+":
-                ChristmasX.getInstance().config.bg++;
-                if(ChristmasX.getInstance().config.bg>13) ChristmasX.getInstance().config.bg = 1;
-                if(ChristmasX.getInstance().config.bg>8) bg = new ResourceLocation("void/bg/" + ChristmasX.getInstance().config.bg + ".png");
-                else bg = new ResourceLocation("void/bg/" + ChristmasX.getInstance().config.bg + ".jpg");
-                break;
-            case "chbg-":
-                ChristmasX.getInstance().config.bg--;
-                if(ChristmasX.getInstance().config.bg<1) ChristmasX.getInstance().config.bg = 13;
-                if(ChristmasX.getInstance().config.bg>8) bg = new ResourceLocation("void/bg/" + ChristmasX.getInstance().config.bg + ".png");
-                else bg = new ResourceLocation("void/bg/" + ChristmasX.getInstance().config.bg + ".jpg");
+            case "chbg":
+                mc.displayGuiScreen(new ChristmasCustomizeMenu());
                 break;
         }
         super.actionPerformed(button);

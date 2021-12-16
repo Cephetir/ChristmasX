@@ -13,12 +13,16 @@ public class Particle {
     public ParticleGenerator pg;
     public boolean reset;
     public float size;
-    private Random random = new Random();
+    private final Random random = new Random();
+    public int speedX, speedY;
 
-    public Particle(int x, int y) {
+    public Particle(int x, int y, int speedX, int speedY, ParticleGenerator generator) {
         this.x = x;
         this.y = y;
         this.size = genRandom(0.7F, 0.8F);
+        this.pg = generator;
+        this.speedX = speedX;
+        this.speedY = speedY;
     }
 
     public void draw() {
@@ -33,8 +37,8 @@ public class Particle {
             reset = true;
         }
 
-        this.x += random.nextInt(4);
-        this.y += random.nextInt(3);
+        this.x += random.nextInt(speedX);
+        this.y += random.nextInt(speedY);
 
         int xx = (int) (MathHelper.cos(0.1F * (this.x + this.k)) * 10.0F);
         RenderUtils.drawBorderedCircle(this.x + xx, this.y, this.size, 0, 0xffFFFFFF);
