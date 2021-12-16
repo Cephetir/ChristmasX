@@ -8,9 +8,9 @@ import org.apache.logging.log4j.Logger;
 import wtf.cephetir.christmasx.config.ChristmasConfig;
 
 @Mod(modid = "christmasx", name = "ChristmasX", version = "1.0")
-public class Christmas {
+public class ChristmasX {
     public static final String NAME = "ChristmasX", VERSION = "1.0", AUTHOR = "Cephetir", PREFIX = "[ChristmasX] ";
-    private static final Christmas INSTANCE = new Christmas();
+    private static final ChristmasX INSTANCE = new ChristmasX();
     private final Minecraft mc = Minecraft.getMinecraft();
     public Logger logger;
     public ChristmasConfig config;
@@ -23,7 +23,7 @@ public class Christmas {
         getInstance().print("Current version " + VERSION);
     }
 
-    public static Christmas getInstance() {
+    public static ChristmasX getInstance() {
         return INSTANCE;
     }
 

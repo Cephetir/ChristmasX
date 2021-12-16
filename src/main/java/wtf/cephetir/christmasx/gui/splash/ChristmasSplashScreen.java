@@ -8,7 +8,6 @@ import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.shader.Framebuffer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
-import wtf.cephetir.christmasx.Christmas;
 import wtf.cephetir.christmasx.utils.RoundedUtils;
 
 import java.awt.*;
@@ -47,7 +46,7 @@ public class ChristmasSplashScreen {
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
         Gui.drawRect(0, 0, scaledResolution.getScaledWidth(), scaledResolution.getScaledHeight(), Color.BLACK.getRGB());
-        if(mc.fontRendererObj != null) mc.fontRendererObj.drawStringWithShadow(Christmas.NAME, scaledResolution.getScaledWidth() / 2f - (mc.fontRendererObj.getStringWidth(Christmas.NAME) / 2f), scaledResolution.getScaledHeight() / 2f + 18f, new Color(255, 50, 50, 255).getRGB());
+        //if(mc.fontRendererObj != null) mc.fontRendererObj.drawStringWithShadow(ChristmasX.NAME, scaledResolution.getScaledWidth() / 2f - (mc.fontRendererObj.getStringWidth(ChristmasX.NAME) / 2f), scaledResolution.getScaledHeight() / 2f + 18f, new Color(255, 50, 50, 255).getRGB());
         drawImg(scaledResolution.getScaledWidth(), scaledResolution.getScaledHeight(), tm);
         drawProgress();
         frameBuffer.unbindFramebuffer();
@@ -63,7 +62,7 @@ public class ChristmasSplashScreen {
         GlStateManager.resetColor();
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         Gui.drawModalRectWithCustomSizedTexture(0, 0, 0.0f, 0.0f, 1, 1, 1, 1);
-        Gui.drawModalRectWithCustomSizedTexture(width / 2 - 16, height / 2 - 16 - 3, 0.0f, 0.0f, 32, 32, 32, 32);
+        Gui.drawModalRectWithCustomSizedTexture(width / 2 - 16, height / 2 - 16, 0.0f, 0.0f, 32, 32, 32, 32);
     }
 
     private static void drawProgress() {
@@ -73,7 +72,7 @@ public class ChristmasSplashScreen {
         RoundedUtils.drawSmoothRoundedRect(sr.getScaledWidth() / 2f - 50f, sr.getScaledHeight() / 2f + 18 + 15, sr.getScaledWidth() / 2f + 50f, sr.getScaledHeight() / 2f + 18 + 15 + 5, 5f, new Color(255, 255, 255, 255).getRGB());
         GlStateManager.resetColor();
 
-        if(mc.fontRendererObj != null) mc.fontRendererObj.drawStringWithShadow(name, sr.getScaledWidth() / 2f - 50f, sr.getScaledHeight() / 2f + 18 + 15 + 5 + 9, new Color(255, 80, 80, 255).getRGB());
+        if(mc.fontRendererObj != null) mc.fontRendererObj.drawStringWithShadow(name, sr.getScaledWidth() / 2f - (mc.fontRendererObj.getStringWidth(name) / 2f), sr.getScaledHeight() / 2f + 18 + 15 + 5 + 9, new Color(255, 80, 80, 255).getRGB());
         GlStateManager.resetColor();
 
         RoundedUtils.drawSmoothRoundedRect(sr.getScaledWidth() / 2f - 50f, sr.getScaledHeight() / 2f + 18 + 15, sr.getScaledWidth() / 2f - 50f + calc, sr.getScaledHeight() / 2f + 18 + 15 + 5, 5f, new Color(208, 58, 58).getRGB());
