@@ -11,6 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import wtf.cephetir.christmasx.ChristmasX;
 import wtf.cephetir.christmasx.gui.mainmenu.ChristmasMainMenu;
 import wtf.cephetir.christmasx.gui.splash.ChristmasSplashScreen;
 
@@ -21,6 +22,11 @@ public class MixinMinecraft {
     @ModifyVariable(method = "displayGuiScreen(Lnet/minecraft/client/gui/GuiScreen;)V", at = @At(value = "LOAD"), argsOnly = true)
     public GuiScreen displayGuiScreen(GuiScreen screen) {
         return screen instanceof GuiMainMenu ? new ChristmasMainMenu() : screen;
+    }
+
+    @Inject(method = "shutdownMinecraftApplet", at = @At("HEAD"))
+    public void shutdownMinecraftApplet(CallbackInfo ci) {
+        ChristmasX.getInstance().config.save();
     }
 
     @Inject(method = "startGame", at = @At(value = "FIELD", opcode = Opcodes.PUTFIELD, target = "Lnet/minecraft/client/Minecraft;fontRendererObj:Lnet/minecraft/client/gui/FontRenderer;"))
