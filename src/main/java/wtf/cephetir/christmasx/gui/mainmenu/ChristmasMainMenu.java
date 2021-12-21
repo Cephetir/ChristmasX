@@ -110,7 +110,7 @@ public class ChristmasMainMenu extends GuiScreen {
         if (ChristmasX.getInstance().config.bg > 8 || ChristmasX.getInstance().config.bg == 4)
             bg = new ResourceLocation("void/bg/" + ChristmasX.getInstance().config.bg + ".png");
         else bg = new ResourceLocation("void/bg/" + ChristmasX.getInstance().config.bg + ".jpg");
-        particleGenerator = new ParticleGenerator(150, width, height);
+        ChristmasX.getInstance().particleGenerator = particleGenerator = new ParticleGenerator(ChristmasX.getInstance().config.pAmount, width, height);
         super.initGui();
     }
 
@@ -130,7 +130,7 @@ public class ChristmasMainMenu extends GuiScreen {
                 mc.shutdown();
                 break;
             case "chbg":
-                mc.displayGuiScreen(new ChristmasCustomizeMenu(this));
+                mc.displayGuiScreen(new ChristmasCustomizeMenu());
                 break;
         }
         super.actionPerformed(button);

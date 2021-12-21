@@ -18,7 +18,9 @@ public class ChristmasConfig {
     public int bg = 1;
     public int speedX = 2;
     public int speedY = 3;
+    public int pAmount = 150;
     public boolean toggleButtons = true;
+    public boolean toggleSplash = true;
 
     public void save() {
         try {
@@ -33,7 +35,9 @@ public class ChristmasConfig {
             json.addProperty("bg", bg);
             json.addProperty("speedX", speedX);
             json.addProperty("speedY", speedY);
+            json.addProperty("pAmount", pAmount);
             json.addProperty("toggleButtons", toggleButtons);
+            json.addProperty("toggleSplash", toggleSplash);
 
             writer.write(gson.toJson(json));
             writer.close();
@@ -59,10 +63,12 @@ public class ChristmasConfig {
             Scanner scanner = new Scanner(file);
 
             JsonObject json = gson.fromJson(scanner.nextLine(), JsonObject.class);
-            bg = json.getAsJsonPrimitive("bg").getAsInt();
-            speedX = json.getAsJsonPrimitive("speedX").getAsInt();
-            speedY = json.getAsJsonPrimitive("speedY").getAsInt();
-            toggleButtons = json.getAsJsonPrimitive("toggleButtons").getAsBoolean();
+            bg = json.has("bg") ? json.getAsJsonPrimitive("bg").getAsInt() : 1;
+            speedX = json.has("speedX") ? json.getAsJsonPrimitive("speedX").getAsInt() : 2;
+            speedY = json.has("speedY") ? json.getAsJsonPrimitive("speedY").getAsInt() : 3;
+            pAmount = json.has("pAmount") ? json.getAsJsonPrimitive("pAmount").getAsInt() : 150;
+            toggleButtons = json.has("toggleButtons") ? json.getAsJsonPrimitive("toggleButtons").getAsBoolean() : true;
+            toggleSplash = json.has("toggleSplash") ? json.getAsJsonPrimitive("toggleSplash").getAsBoolean() : true;
 
             scanner.close();
             ChristmasX.getInstance().print("Loaded config!");
