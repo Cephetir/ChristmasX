@@ -16,7 +16,7 @@ public class MixinGuiOptions {
     public void initGui(CallbackInfo ci) {
         IMixinGuiScreen IMixinGuiScreen = (IMixinGuiScreen) (Object) this;
         GuiScreen GuiScreen = (GuiScreen) (Object) this;
-        IMixinGuiScreen.getbuttonlist().add(new GuiButton(999, GuiScreen.width / 2 - 155, GuiScreen.height / 6 + 48 - 6 - 24, 150, 20, "ChristmasX"));
+        IMixinGuiScreen.getbuttonlist().add(new GuiButton(999, GuiScreen.width / 2 - 155, GuiScreen.height / 6 + 48 - 6 - 24, 150, 20, "ChristmasX..."));
     }
 
     @Inject(method = "actionPerformed", at = @At("HEAD"))

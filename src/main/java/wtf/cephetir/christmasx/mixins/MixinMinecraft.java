@@ -58,7 +58,7 @@ public class MixinMinecraft {
 
     @Inject(method = "startGame", at = @At(value = "FIELD", opcode = Opcodes.PUTFIELD, target = "Lnet/minecraft/client/Minecraft;renderItem:Lnet/minecraft/client/renderer/entity/RenderItem;"))
     public void startGame6(CallbackInfo ci) {
-        ChristmasSplashScreen.update("Loading Item Renderer", 4);
+        ChristmasSplashScreen.update("Loading Mods", 4);
     }
 
     @Inject(method = "startGame", at = @At(value = "FIELD", opcode = Opcodes.PUTFIELD, target = "Lnet/minecraft/client/Minecraft;entityRenderer:Lnet/minecraft/client/renderer/EntityRenderer;"))
