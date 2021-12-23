@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import wtf.cephetir.christmasx.ChristmasX;
+import wtf.cephetir.christmasx.config.ChristmasConfig;
 import wtf.cephetir.christmasx.utils.RoundedUtils;
 
 import java.awt.*;
@@ -40,7 +40,7 @@ public abstract class MixinGuiButton {
 
     @Inject(method = "drawButton", at = @At("HEAD"), cancellable = true)
     public void drawButton(Minecraft mc, int mouseX, int mouseY, CallbackInfo cir) {
-        if (ChristmasX.getInstance().config.toggleButtons) {
+        if (ChristmasConfig.toggleButtons) {
             cir.cancel();
             FontRenderer fontrenderer = mc.fontRendererObj;
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);

@@ -11,33 +11,34 @@ import java.io.FileWriter;
 import java.util.Scanner;
 
 public class ChristmasConfig {
-    File dir = new File(Minecraft.getMinecraft().mcDataDir, "/config");
-    File file = new File(dir, "/christamsx.json");
+    static File dir = new File(Minecraft.getMinecraft().mcDataDir, "/config");
+    static File file = new File(dir, "/christamsx.json");
 
 
-    public int bg = 1;
-    public int speedX = 2;
-    public int speedY = 3;
-    public int pAmount = 150;
-    public boolean toggleButtons = true;
-    public boolean toggleSplash = true;
+    public static int bg = 1;
+    public static int speedX = 2;
+    public static int speedY = 3;
+    public static int pAmount = 150;
+    public static boolean toggleButtons = true;
+    public static boolean toggleSplash = true;
 
-    public void save() {
+    public static void save() {
         try {
             ChristmasX.getInstance().print("Saving config...");
-            if(!dir.exists()) dir.mkdirs();;
-            if(!file.exists()) file.createNewFile();
+            if (!ChristmasConfig.dir.exists()) ChristmasConfig.dir.mkdirs();
+            ;
+            if (!ChristmasConfig.file.exists()) ChristmasConfig.file.createNewFile();
             ChristmasX.getInstance().print("Saving config...");
             Gson gson = new Gson();
             JsonObject json = new JsonObject();
-            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(ChristmasConfig.file));
 
-            json.addProperty("bg", bg);
-            json.addProperty("speedX", speedX);
-            json.addProperty("speedY", speedY);
-            json.addProperty("pAmount", pAmount);
-            json.addProperty("toggleButtons", toggleButtons);
-            json.addProperty("toggleSplash", toggleSplash);
+            json.addProperty("bg", ChristmasConfig.bg);
+            json.addProperty("speedX", ChristmasConfig.speedX);
+            json.addProperty("speedY", ChristmasConfig.speedY);
+            json.addProperty("pAmount", ChristmasConfig.pAmount);
+            json.addProperty("toggleButtons", ChristmasConfig.toggleButtons);
+            json.addProperty("toggleSplash", ChristmasConfig.toggleSplash);
 
             writer.write(gson.toJson(json));
             writer.close();
@@ -47,31 +48,32 @@ public class ChristmasConfig {
         }
     }
 
-    public void load() {
+    public static void load() {
         try {
-            if(!dir.exists()) {
-                dir.mkdirs();
-                file.createNewFile();
-                return;
-            };
-            if(!file.exists()) {
-                file.createNewFile();
+            if (!ChristmasConfig.dir.exists()) {
+                ChristmasConfig.dir.mkdirs();
+                ChristmasConfig.file.createNewFile();
                 return;
             }
-            ChristmasX.getInstance().print("Loading config...");
+            ;
+            if (!ChristmasConfig.file.exists()) {
+                ChristmasConfig.file.createNewFile();
+                return;
+            }
+            if (ChristmasX.getInstance().logger != null) ChristmasX.getInstance().print("Loading config...");
             Gson gson = new Gson();
             Scanner scanner = new Scanner(file);
 
             JsonObject json = gson.fromJson(scanner.nextLine(), JsonObject.class);
-            bg = json.has("bg") ? json.getAsJsonPrimitive("bg").getAsInt() : 1;
-            speedX = json.has("speedX") ? json.getAsJsonPrimitive("speedX").getAsInt() : 2;
-            speedY = json.has("speedY") ? json.getAsJsonPrimitive("speedY").getAsInt() : 3;
-            pAmount = json.has("pAmount") ? json.getAsJsonPrimitive("pAmount").getAsInt() : 150;
-            toggleButtons = json.has("toggleButtons") ? json.getAsJsonPrimitive("toggleButtons").getAsBoolean() : true;
-            toggleSplash = json.has("toggleSplash") ? json.getAsJsonPrimitive("toggleSplash").getAsBoolean() : true;
+            ChristmasConfig.bg = json.has("bg") ? json.getAsJsonPrimitive("bg").getAsInt() : 1;
+            ChristmasConfig.speedX = json.has("speedX") ? json.getAsJsonPrimitive("speedX").getAsInt() : 2;
+            ChristmasConfig.speedY = json.has("speedY") ? json.getAsJsonPrimitive("speedY").getAsInt() : 3;
+            ChristmasConfig.pAmount = json.has("pAmount") ? json.getAsJsonPrimitive("pAmount").getAsInt() : 150;
+            ChristmasConfig.toggleButtons = json.has("toggleButtons") ? json.getAsJsonPrimitive("toggleButtons").getAsBoolean() : true;
+            ChristmasConfig.toggleSplash = json.has("toggleSplash") ? json.getAsJsonPrimitive("toggleSplash").getAsBoolean() : true;
 
             scanner.close();
-            ChristmasX.getInstance().print("Loaded config!");
+            if (ChristmasX.getInstance().logger != null) ChristmasX.getInstance().print("Loaded config!");
         } catch (Exception e) {
             e.printStackTrace();
         }

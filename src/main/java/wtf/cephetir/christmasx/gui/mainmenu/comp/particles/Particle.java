@@ -1,7 +1,7 @@
 package wtf.cephetir.christmasx.gui.mainmenu.comp.particles;
 
 import net.minecraft.util.MathHelper;
-import wtf.cephetir.christmasx.ChristmasX;
+import wtf.cephetir.christmasx.config.ChristmasConfig;
 import wtf.cephetir.christmasx.utils.RenderUtils;
 
 import java.util.Random;
@@ -24,7 +24,7 @@ public class Particle {
     }
 
     public void draw() {
-        if (ChristmasX.getInstance().config.speedX == 0 && ChristmasX.getInstance().config.speedY == 0) {
+        if (ChristmasConfig.speedX == 0 && ChristmasConfig.speedY == 0) {
             if (x >= pg.breite) {
                 x = -1;
                 reset = true;
@@ -34,20 +34,7 @@ public class Particle {
                 y = -1;
                 reset = true;
             }
-        } else if (ChristmasX.getInstance().config.speedX == 0) {
-
-            if (x >= pg.breite) {
-                x = -1;
-                reset = true;
-            }
-
-            if (y >= pg.höhe) {
-                y = -1;
-                reset = true;
-            }
-
-            this.y += random.nextInt(ChristmasX.getInstance().config.speedY);
-        } else if (ChristmasX.getInstance().config.speedY == 0) {
+        } else if (ChristmasConfig.speedX == 0) {
 
             if (x >= pg.breite) {
                 x = -1;
@@ -59,9 +46,22 @@ public class Particle {
                 reset = true;
             }
 
-            this.x += random.nextInt(ChristmasX.getInstance().config.speedX);
-        } else if (ChristmasX.getInstance().config.speedX >= 1) {
-            if (ChristmasX.getInstance().config.speedY >= 1) {
+            this.y += random.nextInt(ChristmasConfig.speedY);
+        } else if (ChristmasConfig.speedY == 0) {
+
+            if (x >= pg.breite) {
+                x = -1;
+                reset = true;
+            }
+
+            if (y >= pg.höhe) {
+                y = -1;
+                reset = true;
+            }
+
+            this.x += random.nextInt(ChristmasConfig.speedX);
+        } else if (ChristmasConfig.speedX >= 1) {
+            if (ChristmasConfig.speedY >= 1) {
                 if (x >= pg.breite) {
                     x = -1;
                     reset = true;
@@ -72,8 +72,8 @@ public class Particle {
                     reset = true;
                 }
 
-                this.x += random.nextInt(ChristmasX.getInstance().config.speedX);
-                this.y += random.nextInt(ChristmasX.getInstance().config.speedY);
+                this.x += random.nextInt(ChristmasConfig.speedX);
+                this.y += random.nextInt(ChristmasConfig.speedY);
             } else {
                 if (x >= pg.breite) {
                     x = -1;
@@ -85,10 +85,10 @@ public class Particle {
                     reset = true;
                 }
 
-                this.x += random.nextInt(ChristmasX.getInstance().config.speedX);
-                this.y -= random.nextInt(ChristmasX.getInstance().config.speedY * -1);
+                this.x += random.nextInt(ChristmasConfig.speedX);
+                this.y -= random.nextInt(ChristmasConfig.speedY * -1);
             }
-        } else if (ChristmasX.getInstance().config.speedY >= 1) {
+        } else if (ChristmasConfig.speedY >= 1) {
             if (x <= -1) {
                 x = pg.breite;
                 reset = true;
@@ -99,8 +99,8 @@ public class Particle {
                 reset = true;
             }
 
-            this.x -= random.nextInt(ChristmasX.getInstance().config.speedX * -1);
-            this.y += random.nextInt(ChristmasX.getInstance().config.speedY);
+            this.x -= random.nextInt(ChristmasConfig.speedX * -1);
+            this.y += random.nextInt(ChristmasConfig.speedY);
         } else {
             if (x <= -1) {
                 x = pg.breite;
@@ -112,8 +112,8 @@ public class Particle {
                 reset = true;
             }
 
-            this.x -= random.nextInt(ChristmasX.getInstance().config.speedX * -1);
-            this.y -= random.nextInt(ChristmasX.getInstance().config.speedY * -1);
+            this.x -= random.nextInt(ChristmasConfig.speedX * -1);
+            this.y -= random.nextInt(ChristmasConfig.speedY * -1);
         }
 
         int xx = (int) (MathHelper.cos(0.1F * (this.x + this.k)) * 10.0F);

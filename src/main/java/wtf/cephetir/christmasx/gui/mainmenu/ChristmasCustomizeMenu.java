@@ -6,6 +6,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import wtf.cephetir.christmasx.ChristmasX;
+import wtf.cephetir.christmasx.config.ChristmasConfig;
 import wtf.cephetir.christmasx.gui.mainmenu.comp.CustomButton;
 import wtf.cephetir.christmasx.gui.mainmenu.comp.GuiScreen;
 import wtf.cephetir.christmasx.gui.mainmenu.comp.particles.ParticleGenerator;
@@ -40,8 +41,8 @@ public class ChristmasCustomizeMenu extends GuiScreen {
         drawRect(0, 0, width, height, new Color(0, 0, 0, 135).getRGB());
 
         RoundedUtils.drawRoundedRect(width / 2f - fontRendererObj.getStringWidth("Change snow speed X") / 2f - (fontRendererObj.getStringWidth("<-") + 16) - 50, height / 5f + 20 * 2 + 20 + 20 + 20, (width / 2f - fontRendererObj.getStringWidth("Change snow speed X") / 2f - (fontRendererObj.getStringWidth("<-") + 16) - 50) + 198 + 80, height / 5f + 20 * 2 + 20 + fontRendererObj.FONT_HEIGHT + 8 + 20 + 20 + 20, 6f, new Color(255, 255, 255, 94).getRGB());
-        fontRendererObj.drawStringWithShadow("Current Particles Speed X: " + ChristmasX.getInstance().config.speedX + ", Speed Y: " + ChristmasX.getInstance().config.speedY + ", Amount: " + ChristmasX.getInstance().config.pAmount, width / 2f - fontRendererObj.getStringWidth("Current Particles Speed X: " + ChristmasX.getInstance().config.speedX + ", Speed Y: " + ChristmasX.getInstance().config.speedY + ", Amount: " + ChristmasX.getInstance().config.pAmount) / 2f + 8, height / 5f + 20 * 2 + 24 + 40, new Color(243, 100, 100, 255).getRGB());
-        fontRendererObj.drawStringWithShadow("Custom Splash Screen: " + (ChristmasX.getInstance().config.toggleSplash ? "On" : "Off") + ", Custom Buttons: " + (ChristmasX.getInstance().config.toggleButtons ? "On" : "Off"), width / 2f - fontRendererObj.getStringWidth("Current Speed X:" + ChristmasX.getInstance().config.speedX + " Y:" + ChristmasX.getInstance().config.speedY + ", Amount:" + ChristmasX.getInstance().config.pAmount) / 2f + 8 - 30, height / 5f + 20 * 2 + 24 + 40 + 20, new Color(243, 100, 100, 255).getRGB());
+        fontRendererObj.drawStringWithShadow("Current Particles Speed X: " + ChristmasConfig.speedX + ", Speed Y: " + ChristmasConfig.speedY + ", Amount: " + ChristmasConfig.pAmount, width / 2f - fontRendererObj.getStringWidth("Current Particles Speed X: " + ChristmasConfig.speedX + ", Speed Y: " + ChristmasConfig.speedY + ", Amount: " + ChristmasConfig.pAmount) / 2f + 8, height / 5f + 20 * 2 + 24 + 40, new Color(243, 100, 100, 255).getRGB());
+        fontRendererObj.drawStringWithShadow("Custom Splash Screen: " + (ChristmasConfig.toggleSplash ? "On" : "Off") + ", Custom Buttons: " + (ChristmasConfig.toggleButtons ? "On" : "Off"), width / 2f - fontRendererObj.getStringWidth("Current Speed X:" + ChristmasConfig.speedX + " Y:" + ChristmasConfig.speedY + ", Amount:" + ChristmasConfig.pAmount) / 2f + 8 - 30, height / 5f + 20 * 2 + 24 + 40 + 20, new Color(243, 100, 100, 255).getRGB());
 
         GlStateManager.enableAlpha();
         GlStateManager.alphaFunc(516, 0.1F);
@@ -58,8 +59,8 @@ public class ChristmasCustomizeMenu extends GuiScreen {
     public void initGui() {
         this.customButtonList.clear();
         this.customButtonList.add(new CustomButton("q", 10, height - (fontRendererObj.FONT_HEIGHT + 13), 200, 20, "Return", new Color(255, 255, 255, 255), new Color(255, 255, 255, 94), new Color(243, 100, 100, 255), new Color(208, 59, 59, 255)));
-        this.customButtonList.add(new CustomButton("ts", width / 2 - fontRendererObj.getStringWidth("Toggle Custom Splash Screen") / 2, height / 5 - 40, fontRendererObj.getStringWidth("Toggle Custom Splash Screen") + 16, fontRendererObj.FONT_HEIGHT + 8, "Toggle Custom Splash Screen", new Color(255, 255, 255, 255), new Color(255, 255, 255, 94), new Color(243, 100, 100, 255), new Color(208, 59, 59, 255)));
-        this.customButtonList.add(new CustomButton("tcb", width / 2 - fontRendererObj.getStringWidth("Toggle Custom Splash Screen") / 2, height / 5 - 20, fontRendererObj.getStringWidth("Toggle Custom Splash Screen") + 16, fontRendererObj.FONT_HEIGHT + 8, "Toggle Custom Buttons", new Color(255, 255, 255, 255), new Color(255, 255, 255, 94), new Color(243, 100, 100, 255), new Color(208, 59, 59, 255)));
+        this.customButtonList.add(new CustomButton("ts", width / 2 - fontRendererObj.getStringWidth("Toggle Custom Splash Screen") / 2 - 17, height / 5 - 40, fontRendererObj.getStringWidth("Toggle Custom Splash Screen") + 16 + 34, fontRendererObj.FONT_HEIGHT + 8, "Toggle Custom Splash Screen", new Color(255, 255, 255, 255), new Color(255, 255, 255, 94), new Color(243, 100, 100, 255), new Color(208, 59, 59, 255)));
+        this.customButtonList.add(new CustomButton("tcb", width / 2 - fontRendererObj.getStringWidth("Toggle Custom Splash Screen") / 2 - 17, height / 5 - 20, fontRendererObj.getStringWidth("Toggle Custom Splash Screen") + 16 + 34, fontRendererObj.FONT_HEIGHT + 8, "Toggle Custom Buttons", new Color(255, 255, 255, 255), new Color(255, 255, 255, 94), new Color(243, 100, 100, 255), new Color(208, 59, 59, 255)));
         this.customButtonList.add(new CustomButton("n", width / 2 - fontRendererObj.getStringWidth("Change background X") / 2, height / 5, fontRendererObj.getStringWidth("Change background X") + 16, fontRendererObj.FONT_HEIGHT + 8, "Change Background", new Color(243, 100, 100, 255), new Color(255, 255, 255, 94), new Color(243, 100, 100, 255), new Color(255, 255, 255, 94)));
         this.customButtonList.add(new CustomButton("chbg+", width / 2 + fontRendererObj.getStringWidth("Change snow speed X") / 2 + (fontRendererObj.getStringWidth("->") + 10) + 5, height / 5, fontRendererObj.getStringWidth("->") + 16, fontRendererObj.FONT_HEIGHT + 8, "->", new Color(255, 255, 255, 255), new Color(255, 255, 255, 94), new Color(243, 100, 100, 255), new Color(208, 59, 59, 255)));
         this.customButtonList.add(new CustomButton("chbg-", width / 2 - fontRendererObj.getStringWidth("Change snow speed X") / 2 - (fontRendererObj.getStringWidth("<-") + 16) - 10, height / 5, fontRendererObj.getStringWidth("<-") + 16, fontRendererObj.FONT_HEIGHT + 8, "<-", new Color(255, 255, 255, 255), new Color(255, 255, 255, 94), new Color(243, 100, 100, 255), new Color(208, 59, 59, 255)));
@@ -73,9 +74,9 @@ public class ChristmasCustomizeMenu extends GuiScreen {
         this.customButtonList.add(new CustomButton("chpa+", width / 2 + fontRendererObj.getStringWidth("Change snow speed Y") / 2 + (fontRendererObj.getStringWidth("->") + 10) + 5, height / 5 + 20 * 3, fontRendererObj.getStringWidth("->") + 16, fontRendererObj.FONT_HEIGHT + 8, "->", new Color(255, 255, 255, 255), new Color(255, 255, 255, 94), new Color(243, 100, 100, 255), new Color(208, 59, 59, 255)));
         this.customButtonList.add(new CustomButton("chpa-", width / 2 - fontRendererObj.getStringWidth("Change snow speed Y") / 2 - (fontRendererObj.getStringWidth("<-") + 16) - 10, height / 5 + 20 * 3, fontRendererObj.getStringWidth("<-") + 16, fontRendererObj.FONT_HEIGHT + 8, "<-", new Color(255, 255, 255, 255), new Color(255, 255, 255, 94), new Color(243, 100, 100, 255), new Color(208, 59, 59, 255)));
         //ffmpeg -i "C:\Program Files (x86)\Steam\steamapps\workshop\content\431960\2351726596\TopoDesktop.mp4" -pix_fmt rgba "D:\mod\1VoidClient\src\main\resources\assets\minecraft\void\bg\%01d.png"
-        if (ChristmasX.getInstance().config.bg > 8 || ChristmasX.getInstance().config.bg == 4)
-            bg = new ResourceLocation("void/bg/" + ChristmasX.getInstance().config.bg + ".png");
-        else bg = new ResourceLocation("void/bg/" + ChristmasX.getInstance().config.bg + ".jpg");
+        if (ChristmasConfig.bg > 8 || ChristmasConfig.bg == 4)
+            bg = new ResourceLocation("void/bg/" + ChristmasConfig.bg + ".png");
+        else bg = new ResourceLocation("void/bg/" + ChristmasConfig.bg + ".jpg");
         this.particleGenerator = ChristmasX.getInstance().particleGenerator;
         super.initGui();
     }
@@ -86,48 +87,47 @@ public class ChristmasCustomizeMenu extends GuiScreen {
             case "n":
                 break;
             case "ts":
-                ChristmasX.getInstance().config.toggleSplash = !ChristmasX.getInstance().config.toggleSplash;
+                ChristmasConfig.toggleSplash = !ChristmasConfig.toggleSplash;
                 break;
             case "tcb":
-                ChristmasX.getInstance().config.toggleButtons = !ChristmasX.getInstance().config.toggleButtons;
+                ChristmasConfig.toggleButtons = !ChristmasConfig.toggleButtons;
                 break;
             case "q":
                 mc.displayGuiScreen(new ChristmasMainMenu());
                 break;
             case "chbg+":
-                ChristmasX.getInstance().config.bg++;
-                if (ChristmasX.getInstance().config.bg > 13) ChristmasX.getInstance().config.bg = 1;
-                if (ChristmasX.getInstance().config.bg > 8 || ChristmasX.getInstance().config.bg == 4)
-                    bg = new ResourceLocation("void/bg/" + ChristmasX.getInstance().config.bg + ".png");
-                else bg = new ResourceLocation("void/bg/" + ChristmasX.getInstance().config.bg + ".jpg");
-                ;
+                ChristmasConfig.bg++;
+                if (ChristmasConfig.bg > 13) ChristmasConfig.bg = 1;
+                if (ChristmasConfig.bg > 8 || ChristmasConfig.bg == 4)
+                    bg = new ResourceLocation("void/bg/" + ChristmasConfig.bg + ".png");
+                else bg = new ResourceLocation("void/bg/" + ChristmasConfig.bg + ".jpg");
                 break;
             case "chbg-":
-                ChristmasX.getInstance().config.bg--;
-                if (ChristmasX.getInstance().config.bg < 1) ChristmasX.getInstance().config.bg = 13;
-                if (ChristmasX.getInstance().config.bg > 8 || ChristmasX.getInstance().config.bg == 4)
-                    bg = new ResourceLocation("void/bg/" + ChristmasX.getInstance().config.bg + ".png");
-                else bg = new ResourceLocation("void/bg/" + ChristmasX.getInstance().config.bg + ".jpg");
+                ChristmasConfig.bg--;
+                if (ChristmasConfig.bg < 1) ChristmasConfig.bg = 13;
+                if (ChristmasConfig.bg > 8 || ChristmasConfig.bg == 4)
+                    bg = new ResourceLocation("void/bg/" + ChristmasConfig.bg + ".png");
+                else bg = new ResourceLocation("void/bg/" + ChristmasConfig.bg + ".jpg");
                 break;
             case "chspx+":
-                ChristmasX.getInstance().config.speedX++;
+                ChristmasConfig.speedX++;
                 break;
             case "chspx-":
-                ChristmasX.getInstance().config.speedX--;
+                ChristmasConfig.speedX--;
                 break;
             case "chspy+":
-                ChristmasX.getInstance().config.speedY++;
+                ChristmasConfig.speedY++;
                 break;
             case "chspy-":
-                ChristmasX.getInstance().config.speedY--;
+                ChristmasConfig.speedY--;
                 break;
             case "chpa+":
-                ChristmasX.getInstance().config.pAmount += 10;
-                ChristmasX.getInstance().particleGenerator = particleGenerator = new ParticleGenerator(ChristmasX.getInstance().config.pAmount, width, height);
+                ChristmasConfig.pAmount += 10;
+                ChristmasX.getInstance().particleGenerator = particleGenerator = new ParticleGenerator(ChristmasConfig.pAmount, width, height);
                 break;
             case "chpa-":
-                ChristmasX.getInstance().config.pAmount -= 10;
-                ChristmasX.getInstance().particleGenerator = particleGenerator = new ParticleGenerator(ChristmasX.getInstance().config.pAmount, width, height);
+                ChristmasConfig.pAmount -= 10;
+                ChristmasX.getInstance().particleGenerator = particleGenerator = new ParticleGenerator(ChristmasConfig.pAmount, width, height);
                 break;
         }
         super.actionPerformed(button);

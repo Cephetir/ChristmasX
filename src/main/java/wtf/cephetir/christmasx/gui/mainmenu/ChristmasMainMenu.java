@@ -9,6 +9,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import wtf.cephetir.christmasx.ChristmasX;
+import wtf.cephetir.christmasx.config.ChristmasConfig;
 import wtf.cephetir.christmasx.gui.mainmenu.comp.CustomButton;
 import wtf.cephetir.christmasx.gui.mainmenu.comp.GuiScreen;
 import wtf.cephetir.christmasx.gui.mainmenu.comp.particles.ParticleGenerator;
@@ -104,13 +105,12 @@ public class ChristmasMainMenu extends GuiScreen {
         this.customButtonList.add(new CustomButton("mp", 10, height / 2 - 30, 200, 20, "Multiplayer", new Color(255, 255, 255, 255), new Color(255, 255, 255, 94), new Color(243, 100, 100, 255), new Color(208, 59, 59, 255)));
         this.customButtonList.add(new CustomButton("st", 10, height / 2 - 0, 200, 20, "Settings", new Color(255, 255, 255, 255), new Color(255, 255, 255, 94), new Color(243, 100, 100, 255), new Color(208, 59, 59, 255)));
         this.customButtonList.add(new CustomButton("q", 10, height / 2 + 30, 200, 20, "Quit", new Color(255, 255, 255, 255), new Color(255, 255, 255, 94), new Color(243, 100, 100, 255), new Color(208, 59, 59, 255)));
-        this.customButtonList.add(new CustomButton("chbg", 10, height - (fontRendererObj.FONT_HEIGHT + 13), 200, 20, "Customize", new Color(255, 255, 255, 255), new Color(255, 255, 255, 94), new Color(243, 100, 100, 255), new Color(208, 59, 59, 255)));
         anim();
         //ffmpeg -i "C:\Program Files (x86)\Steam\steamapps\workshop\content\431960\2351726596\TopoDesktop.mp4" -pix_fmt rgba "D:\mod\1VoidClient\src\main\resources\assets\minecraft\void\bg\%01d.png"
-        if (ChristmasX.getInstance().config.bg > 8 || ChristmasX.getInstance().config.bg == 4)
-            bg = new ResourceLocation("void/bg/" + ChristmasX.getInstance().config.bg + ".png");
-        else bg = new ResourceLocation("void/bg/" + ChristmasX.getInstance().config.bg + ".jpg");
-        ChristmasX.getInstance().particleGenerator = particleGenerator = new ParticleGenerator(ChristmasX.getInstance().config.pAmount, width, height);
+        if (ChristmasConfig.bg > 8 || ChristmasConfig.bg == 4)
+            bg = new ResourceLocation("void/bg/" + ChristmasConfig.bg + ".png");
+        else bg = new ResourceLocation("void/bg/" + ChristmasConfig.bg + ".jpg");
+        ChristmasX.getInstance().particleGenerator = particleGenerator = new ParticleGenerator(ChristmasConfig.pAmount, width, height);
         super.initGui();
     }
 
@@ -128,9 +128,6 @@ public class ChristmasMainMenu extends GuiScreen {
                 break;
             case "q":
                 mc.shutdown();
-                break;
-            case "chbg":
-                mc.displayGuiScreen(new ChristmasCustomizeMenu());
                 break;
         }
         super.actionPerformed(button);

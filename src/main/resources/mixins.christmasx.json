@@ -5,6 +5,8 @@
   "client": [
     "MixinMinecraft",
     "MixinSplashProgress",
-    "MixinGuiButton"
+    "MixinGuiButton",
+    "MixinGuiOptions",
+    "IMixinGuiScreen"
   ]
 }
