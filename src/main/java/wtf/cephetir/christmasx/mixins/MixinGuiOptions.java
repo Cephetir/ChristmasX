@@ -21,6 +21,6 @@ public class MixinGuiOptions {
 
     @Inject(method = "actionPerformed", at = @At("HEAD"))
     public void actionPerformed(GuiButton istream, CallbackInfo ci) {
-        if(istream.id == 999) Minecraft.getMinecraft().displayGuiScreen(new ChristmasCustomizeMenu());
+        if(istream.id == 999) Minecraft.getMinecraft().displayGuiScreen(new ChristmasCustomizeMenu((GuiScreen) (Object) this));
     }
 }

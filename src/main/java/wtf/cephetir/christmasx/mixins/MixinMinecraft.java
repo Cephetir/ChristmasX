@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.LogManager;
 import org.spongepowered.asm.lib.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
@@ -37,6 +38,7 @@ public class MixinMinecraft {
         ChristmasX.getInstance().logger = LogManager.getLogger("ChristmasX");
         ChristmasX.getInstance().print("Launching...");
         ChristmasX.getInstance().print("Current version " + ChristmasX.VERSION);
+        MinecraftForge.EVENT_BUS.register(ChristmasX.getInstance());
         ChristmasConfig.load();
         ChristmasSplashScreen.drawSplash(this.renderEngine);
     }

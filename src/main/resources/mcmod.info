@@ -1,16 +1,16 @@
 [
   {
-    "modid": "forgetemplate",
-    "name": "ForgeTemplate",
-    "description": "An example template",
+    "modid": "christmasx",
+    "name": "ChristmasX",
+    "description": "Clean Christmas Cosmetic Mod",
     "version": "${version}",
     "mcversion": "${mcversion}",
     "url": "",
     "updateUrl": "",
     "authorList": [
-      ""
+      "Cephetir"
     ],
-    "credits": "",
+    "credits": "Cephetir",
     "logoFile": "",
     "screenshots": [],
     "dependencies": []

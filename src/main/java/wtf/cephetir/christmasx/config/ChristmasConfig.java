@@ -18,9 +18,10 @@ public class ChristmasConfig {
     public static int bg = 1;
     public static int speedX = 2;
     public static int speedY = 3;
-    public static int pAmount = 150;
+    public static int pAmount = 50;
     public static boolean toggleButtons = true;
     public static boolean toggleSplash = true;
+    public static boolean toggleSnow = true;
 
     public static void save() {
         try {
@@ -39,6 +40,7 @@ public class ChristmasConfig {
             json.addProperty("pAmount", ChristmasConfig.pAmount);
             json.addProperty("toggleButtons", ChristmasConfig.toggleButtons);
             json.addProperty("toggleSplash", ChristmasConfig.toggleSplash);
+            json.addProperty("toggleSnow", ChristmasConfig.toggleSnow);
 
             writer.write(gson.toJson(json));
             writer.close();
@@ -68,9 +70,10 @@ public class ChristmasConfig {
             ChristmasConfig.bg = json.has("bg") ? json.getAsJsonPrimitive("bg").getAsInt() : 1;
             ChristmasConfig.speedX = json.has("speedX") ? json.getAsJsonPrimitive("speedX").getAsInt() : 2;
             ChristmasConfig.speedY = json.has("speedY") ? json.getAsJsonPrimitive("speedY").getAsInt() : 3;
-            ChristmasConfig.pAmount = json.has("pAmount") ? json.getAsJsonPrimitive("pAmount").getAsInt() : 150;
+            ChristmasConfig.pAmount = json.has("pAmount") ? json.getAsJsonPrimitive("pAmount").getAsInt() : 50;
             ChristmasConfig.toggleButtons = json.has("toggleButtons") ? json.getAsJsonPrimitive("toggleButtons").getAsBoolean() : true;
             ChristmasConfig.toggleSplash = json.has("toggleSplash") ? json.getAsJsonPrimitive("toggleSplash").getAsBoolean() : true;
+            ChristmasConfig.toggleSnow = json.has("toggleSnow") ? json.getAsJsonPrimitive("toggleSnow").getAsBoolean() : true;
 
             scanner.close();
             if (ChristmasX.getInstance().logger != null) ChristmasX.getInstance().print("Loaded config!");

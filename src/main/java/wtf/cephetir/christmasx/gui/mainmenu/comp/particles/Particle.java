@@ -1,6 +1,5 @@
 package wtf.cephetir.christmasx.gui.mainmenu.comp.particles;
 
-import net.minecraft.util.MathHelper;
 import wtf.cephetir.christmasx.config.ChristmasConfig;
 import wtf.cephetir.christmasx.utils.RenderUtils;
 
@@ -19,7 +18,7 @@ public class Particle {
     public Particle(int x, int y, ParticleGenerator generator) {
         this.x = x;
         this.y = y;
-        this.size = genRandom(0.7F, 0.8F);
+        this.size = genRandom(0.8F, 1F);
         this.pg = generator;
     }
 
@@ -116,8 +115,8 @@ public class Particle {
             this.y -= random.nextInt(ChristmasConfig.speedY * -1);
         }
 
-        int xx = (int) (MathHelper.cos(0.1F * (this.x + this.k)) * 10.0F);
-        RenderUtils.drawBorderedCircle(this.x + xx, this.y, this.size, 0, 0xffFFFFFF);
+        //int xx = (int) (MathHelper.cos(0.1F * (this.x + this.k)) * 10.0F);
+        RenderUtils.drawCircle(this.x, this.y, this.size, 0xffFFFFFF);
     }
 
 
