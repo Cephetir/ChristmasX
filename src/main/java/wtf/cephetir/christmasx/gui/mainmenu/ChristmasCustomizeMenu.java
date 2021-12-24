@@ -17,7 +17,7 @@ import java.awt.*;
 public class ChristmasCustomizeMenu extends GuiScreen {
     private ResourceLocation bg;
     public ParticleGenerator particleGenerator;
-    private net.minecraft.client.gui.GuiScreen parent;
+    private final net.minecraft.client.gui.GuiScreen parent;
 
     public ChristmasCustomizeMenu(net.minecraft.client.gui.GuiScreen parent) {
         this.parent = parent;
