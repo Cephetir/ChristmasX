@@ -1,4 +1,4 @@
-package wtf.cephetir.christmasx.gui.mainmenu.comp;
+package me.cephetir.christmasx.gui.mainmenu.comp;
 
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;

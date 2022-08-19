@@ -1,5 +1,6 @@
-package wtf.cephetir.christmasx.gui.mainmenu.comp;
+package me.cephetir.christmasx.gui.mainmenu.comp;
 
+import me.cephetir.christmasx.config.ChristmasConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.audio.SoundHandler;
@@ -7,7 +8,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
-import wtf.cephetir.christmasx.utils.RoundedUtils;
+import me.cephetir.christmasx.utils.RoundedUtils;
 
 import java.awt.*;
 
@@ -65,7 +66,6 @@ public class CustomButton extends Gui {
     }
 
     public void drawButton(Minecraft mc, int mouseX, int mouseY) {
-
         FontRenderer fontrenderer = mc.fontRendererObj;
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         this.hovered = mouseX >= this.xPosition && mouseY >= this.yPosition && mouseX < this.xPosition + this.width && mouseY < this.yPosition + this.height;
@@ -73,30 +73,29 @@ public class CustomButton extends Gui {
         GlStateManager.enableBlend();
         GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
         GlStateManager.blendFunc(770, 771);
-        if (!isImage) {
-            int p = this.bkColor;
-
-            if (this.hovered) {
-                p = this.hoverBkColor;
-            }
-            RoundedUtils.drawRoundedRect((float) this.xPosition, (float) this.yPosition, (float) this.xPosition + (float) this.width, (float) this.yPosition + (float) this.height, 6.0F, p);
-            this.mouseDragged(mc, mouseX, mouseY);
-            int j = this.normalColor;
-
-            if (this.hovered) {
-                j = this.hoverColor;
-            }
-
-            this.drawCenteredString(fontrenderer, displayString, (int) (this.xPosition + this.width / 2 + 0.7f), this.yPosition + (this.height - 8) / 2, j);
-        } else if (isImage) {
+        if (isImage) {
             this.mouseDragged(mc, mouseX, mouseY);
             imageLocation = oldImageLocation;
 
-            if (this.hovered) {
-                imageLocation = hoverLocation;
-            }
+            if (this.hovered) imageLocation = hoverLocation;
             mc.getTextureManager().bindTexture(imageLocation);
             drawModalRectWithCustomSizedTexture(this.xPosition, this.yPosition, 0, 0, this.width, this.height, this.textureWidth, this.textureHeight);
+        } else {
+            int p = this.bkColor;
+
+            if (this.hovered)
+                p = this.hoverBkColor;
+
+            RoundedUtils.drawRoundedRect((float) this.xPosition, (float) this.yPosition, (float) this.xPosition + (float) this.width, (float) this.yPosition + (float) this.height, 6.0F, p);
+            if (ChristmasConfig.buttonOutline)
+                RoundedUtils.drawRoundedOutline((float) this.xPosition, (float) this.yPosition, (float) this.xPosition + (float) this.width, (float) this.yPosition + (float) this.height, 6.0F, 2f, this.hoverBkColor);
+
+            this.mouseDragged(mc, mouseX, mouseY);
+            int j = this.normalColor;
+
+            if (this.hovered) j = this.hoverColor;
+
+            this.drawCenteredString(fontrenderer, displayString, (int) (this.xPosition + this.width / 2 + 0.7f), this.yPosition + (this.height - 8) / 2, j);
         }
     }
 

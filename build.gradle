@@ -6,7 +6,7 @@ plugins {
 }
 
 version = "1.0"
-group = "wtf.cephetir"
+group = "me.cephetir"
 archivesBaseName = "ChristmasX"
 
 sourceCompatibility = targetCompatibility = 1.8
@@ -32,8 +32,8 @@ repositories {
 }
 
 dependencies {
-    implementation('org.projectlombok:lombok:1.18.22')
-    annotationProcessor('org.projectlombok:lombok:1.18.22')
+    implementation('org.projectlombok:lombok:1.18.24')
+    annotationProcessor('org.projectlombok:lombok:1.18.24')
     include('org.spongepowered:mixin:0.7.11-SNAPSHOT')
     annotationProcessor('org.spongepowered:mixin:0.7.11-SNAPSHOT')
 }

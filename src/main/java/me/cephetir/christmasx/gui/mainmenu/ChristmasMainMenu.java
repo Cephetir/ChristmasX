@@ -1,5 +1,6 @@
-package wtf.cephetir.christmasx.gui.mainmenu;
+package me.cephetir.christmasx.gui.mainmenu;
 
+import me.cephetir.christmasx.utils.TextureUtils;
 import net.minecraft.client.gui.GuiMultiplayer;
 import net.minecraft.client.gui.GuiOptions;
 import net.minecraft.client.gui.GuiSelectWorld;
@@ -8,18 +9,19 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
-import wtf.cephetir.christmasx.ChristmasX;
-import wtf.cephetir.christmasx.config.ChristmasConfig;
-import wtf.cephetir.christmasx.gui.mainmenu.comp.CustomButton;
-import wtf.cephetir.christmasx.gui.mainmenu.comp.GuiScreen;
-import wtf.cephetir.christmasx.gui.mainmenu.comp.particles.ParticleGenerator;
+import me.cephetir.christmasx.ChristmasX;
+import me.cephetir.christmasx.config.ChristmasConfig;
+import me.cephetir.christmasx.gui.mainmenu.comp.CustomButton;
+import me.cephetir.christmasx.gui.mainmenu.comp.GuiScreen;
+import me.cephetir.christmasx.gui.mainmenu.comp.particles.ParticleGenerator;
 
 import java.awt.*;
+import java.io.File;
 
 public class ChristmasMainMenu extends GuiScreen {
     private int right = 0;
+    private File customBg;
     private ResourceLocation bg;
-    private final ResourceLocation minecraftTitleTextures = new ResourceLocation("textures/gui/title/minecraft.png");
     public ParticleGenerator particleGenerator;
 
     @Override
@@ -36,45 +38,26 @@ public class ChristmasMainMenu extends GuiScreen {
         GlStateManager.disableFog();
         GlStateManager.disableDepth();
         GlStateManager.enableTexture2D();
-        mc.getTextureManager().bindTexture(bg);
+
+        if (customBg == null || !customBg.isFile() || !customBg.exists()) mc.getTextureManager().bindTexture(bg);
+        else TextureUtils.bindTexture(customBg);
+
         GlStateManager.resetColor();
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         drawModalRectWithCustomSizedTexture(-25 + (Mouse.getX() / 90), ((Mouse.getY() * -1 / 90)), 0, 0, width + 25, height + 25, width + 25, height + 25);
 
         drawRect(-1, -1, -1, -1, 1);
         drawRect(0, 0, right, this.height, new Color(1, 1, 1, 155).getRGB());
-//        if (height >= 550 && width >= 1100) {
-//            //drawImg();
-//            GlStateManager.scale(1.5f, 1.5f, 1.5f);
-//            this.drawCenteredString(mc.fontRendererObj, ChristmasX.NAME, 72, height / 4 - 95, new Color(255, 50, 50, 255).getRGB());
-//            GlStateManager.scale(0.55f, 0.55f, 0.55f);
-//            this.drawCenteredString(mc.fontRendererObj, ChristmasX.VERSION, 130, height / 2 - 207 + 25, new Color(255, 80, 80, 255).getRGB());
-//        } else if (height >= 400 && width >= 800) {
-//            //drawImg2();
-//            GlStateManager.scale(1.5f, 1.5f, 1.5f);
-//            this.drawCenteredString(mc.fontRendererObj, ChristmasX.NAME, 72, height / 4 - 83, new Color(255, 50, 50, 255).getRGB());
-//            GlStateManager.scale(0.55f, 0.55f, 0.55f);
-//            this.drawCenteredString(mc.fontRendererObj, ChristmasX.VERSION, 130, height / 2 - 207 + 48, new Color(255, 80, 80, 255).getRGB());
-//        }
-
 
         GlStateManager.enableAlpha();
         GlStateManager.alphaFunc(516, 0.1F);
         GlStateManager.popMatrix();
 
-        int i = 274;
-        int j = this.width / 2 - i / 2;
-        int k = 30;
-        this.mc.getTextureManager().bindTexture(minecraftTitleTextures);
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-        GlStateManager.scale(0.7, 0.7, 0.7);
-        this.drawTexturedModalRect(j - 480, k + 100, 0, 0, 155, 44);
-        this.drawTexturedModalRect(j + 155 - 480, k + 100, 0, 45, 155, 44);
-        GlStateManager.scale(1.4285714286, 1.4285714286, 1.4285714286);
-
-        particleGenerator.breite = width;
-        particleGenerator.höhe = height;
-        particleGenerator.drawParticles();
+        if (ChristmasConfig.toggleSnow) {
+            particleGenerator.breite = width;
+            particleGenerator.höhe = height;
+            particleGenerator.drawParticles();
+        }
 
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
@@ -84,11 +67,8 @@ public class ChristmasMainMenu extends GuiScreen {
             int cooldown = 50;
             while (right != 225) {
                 right++;
-                if (cooldown > 10) {
-                    cooldown -= 10;
-                } else if (cooldown > 1) {
-                    cooldown -= 1;
-                }
+                if (cooldown > 10) cooldown -= 10;
+                else if (cooldown > 1) cooldown -= 1;
                 try {
                     Thread.sleep(cooldown);
                 } catch (InterruptedException e) {
@@ -106,11 +86,16 @@ public class ChristmasMainMenu extends GuiScreen {
         this.customButtonList.add(new CustomButton("st", 10, height / 2 - 0, 200, 20, "Settings", new Color(255, 255, 255, 255), new Color(255, 255, 255, 94), new Color(243, 100, 100, 255), new Color(208, 59, 59, 255)));
         this.customButtonList.add(new CustomButton("q", 10, height / 2 + 30, 200, 20, "Quit", new Color(255, 255, 255, 255), new Color(255, 255, 255, 94), new Color(243, 100, 100, 255), new Color(208, 59, 59, 255)));
         anim();
-        //ffmpeg -i "C:\Program Files (x86)\Steam\steamapps\workshop\content\431960\2351726596\TopoDesktop.mp4" -pix_fmt rgba "D:\mod\1VoidClient\src\main\resources\assets\minecraft\void\bg\%01d.png"
-        if (ChristmasConfig.bg > 8 || ChristmasConfig.bg == 4)
-            bg = new ResourceLocation("void/bg/" + ChristmasConfig.bg + ".png");
-        else bg = new ResourceLocation("void/bg/" + ChristmasConfig.bg + ".jpg");
-        ChristmasX.getInstance().particleGenerator = particleGenerator = new ParticleGenerator(ChristmasConfig.pAmount, width, height);
+
+        //ffmpeg -i "C:\Program Files (x86)\Steam\steamapps\workshop\content\431960\2351726596\TopoDesktop.mp4" -pix_fmt rgba "D:\mod\1VoidClient\src\main\resources\assets\minecraft\christmasx\bg\%01d.png"
+        customBg = null;
+        File file = new File(ChristmasConfig.customBgPath);
+        if (ChristmasConfig.customBg && file.isFile() && file.exists()) customBg = file;
+
+        if (ChristmasConfig.bg > 8 || ChristmasConfig.bg == 4) bg = new ResourceLocation("christmasx/bg/" + ChristmasConfig.bg + ".png");
+        else bg = new ResourceLocation("christmasx/bg/" + ChristmasConfig.bg + ".jpg");
+
+        ChristmasX.INSTANCE.particleGenerator = particleGenerator = new ParticleGenerator(ChristmasConfig.pAmount, width, height);
         super.initGui();
     }
 

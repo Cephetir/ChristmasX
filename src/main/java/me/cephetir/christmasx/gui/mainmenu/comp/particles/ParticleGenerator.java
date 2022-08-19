@@ -1,4 +1,4 @@
-package wtf.cephetir.christmasx.gui.mainmenu.comp.particles;
+package me.cephetir.christmasx.gui.mainmenu.comp.particles;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -10,7 +10,7 @@ public class ParticleGenerator {
     public int höhe;
 
     public ArrayList<Particle> particles = new ArrayList<>();
-    private Random random = new Random();
+    private final Random random = new Random();
 
     public ParticleGenerator(int anzahl, int breite, int höhe) {
         this.anzahl = anzahl;
@@ -21,6 +21,7 @@ public class ParticleGenerator {
     }
 
     public void drawParticles() {
-        for (Particle p : this.particles) p.draw();
+        for (Particle p : this.particles)
+            p.draw();
     }
 }

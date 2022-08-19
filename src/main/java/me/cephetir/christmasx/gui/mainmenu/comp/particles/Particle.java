@@ -1,7 +1,7 @@
-package wtf.cephetir.christmasx.gui.mainmenu.comp.particles;
+package me.cephetir.christmasx.gui.mainmenu.comp.particles;
 
-import wtf.cephetir.christmasx.config.ChristmasConfig;
-import wtf.cephetir.christmasx.utils.RenderUtils;
+import me.cephetir.christmasx.config.ChristmasConfig;
+import me.cephetir.christmasx.utils.RenderUtils;
 
 import java.util.Random;
 

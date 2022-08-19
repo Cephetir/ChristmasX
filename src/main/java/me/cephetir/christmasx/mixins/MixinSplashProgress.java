@@ -1,11 +1,11 @@
-package wtf.cephetir.christmasx.mixins;
+package me.cephetir.christmasx.mixins;
 
 import net.minecraftforge.fml.client.SplashProgress;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import wtf.cephetir.christmasx.config.ChristmasConfig;
+import me.cephetir.christmasx.config.ChristmasConfig;
 
 @Mixin(SplashProgress.class)
 public class MixinSplashProgress {

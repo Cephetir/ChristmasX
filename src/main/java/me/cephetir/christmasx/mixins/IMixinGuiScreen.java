@@ -1,4 +1,4 @@
-package wtf.cephetir.christmasx.mixins;
+package me.cephetir.christmasx.mixins;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;

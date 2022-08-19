@@ -1,5 +1,7 @@
-package wtf.cephetir.christmasx.mixins;
+package me.cephetir.christmasx.mixins;
 
+import me.cephetir.christmasx.config.ChristmasConfig;
+import me.cephetir.christmasx.utils.RoundedUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
@@ -10,8 +12,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import wtf.cephetir.christmasx.config.ChristmasConfig;
-import wtf.cephetir.christmasx.utils.RoundedUtils;
 
 import java.awt.*;
 
@@ -55,6 +55,9 @@ public abstract class MixinGuiButton {
             if (this.hovered) p = new Color(208, 59, 59, 255).getRGB();
 
             RoundedUtils.drawRoundedRect((float) this.xPosition, (float) this.yPosition, (float) this.xPosition + (float) this.width, (float) this.yPosition + (float) this.height, 6.0F, p);
+            if (ChristmasConfig.buttonOutline)
+                RoundedUtils.drawRoundedOutline((float) this.xPosition, (float) this.yPosition, (float) this.xPosition + (float) this.width, (float) this.yPosition + (float) this.height, 6.0F, 2f, new Color(208, 59, 59, 255).getRGB());
+
             this.mouseDragged(mc, mouseX, mouseY);
             int j = new Color(243, 100, 100, 255).getRGB();
 

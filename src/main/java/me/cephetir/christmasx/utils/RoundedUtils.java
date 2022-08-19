@@ -1,4 +1,4 @@
-package wtf.cephetir.christmasx.utils;
+package me.cephetir.christmasx.utils;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;

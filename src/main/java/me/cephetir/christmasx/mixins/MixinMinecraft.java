@@ -1,11 +1,10 @@
-package wtf.cephetir.christmasx.mixins;
+package me.cephetir.christmasx.mixins;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraftforge.common.MinecraftForge;
-import org.apache.logging.log4j.LogManager;
 import org.spongepowered.asm.lib.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -13,10 +12,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import wtf.cephetir.christmasx.ChristmasX;
-import wtf.cephetir.christmasx.config.ChristmasConfig;
-import wtf.cephetir.christmasx.gui.mainmenu.ChristmasMainMenu;
-import wtf.cephetir.christmasx.gui.splash.ChristmasSplashScreen;
+import me.cephetir.christmasx.ChristmasX;
+import me.cephetir.christmasx.config.ChristmasConfig;
+import me.cephetir.christmasx.gui.mainmenu.ChristmasMainMenu;
+import me.cephetir.christmasx.gui.splash.ChristmasSplashScreen;
 
 @Mixin(Minecraft.class)
 public class MixinMinecraft {
@@ -35,10 +34,8 @@ public class MixinMinecraft {
 
     @Inject(method = "startGame", at = @At(value = "FIELD", opcode = Opcodes.PUTFIELD, target = "Lnet/minecraft/client/Minecraft;fontRendererObj:Lnet/minecraft/client/gui/FontRenderer;"))
     public void startGame(CallbackInfo ci) {
-        ChristmasX.getInstance().logger = LogManager.getLogger("ChristmasX");
-        ChristmasX.getInstance().print("Launching...");
-        ChristmasX.getInstance().print("Current version " + ChristmasX.VERSION);
-        MinecraftForge.EVENT_BUS.register(ChristmasX.getInstance());
+        ChristmasX.logger.info("Launching...");
+        MinecraftForge.EVENT_BUS.register(ChristmasX.INSTANCE);
         ChristmasConfig.load();
         ChristmasSplashScreen.drawSplash(this.renderEngine);
     }
