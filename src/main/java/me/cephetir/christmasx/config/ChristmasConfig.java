@@ -46,6 +46,7 @@ public class ChristmasConfig {
             json.addProperty("toggleSnow", ChristmasConfig.toggleSnow);
             json.addProperty("customBg", ChristmasConfig.customBg);
             json.addProperty("customBgPath", ChristmasConfig.customBgPath);
+            json.addProperty("buttonOutline", ChristmasConfig.buttonOutline);
 
             writer.write(gson.toJson(json));
             writer.close();
@@ -75,7 +76,8 @@ public class ChristmasConfig {
             ChristmasConfig.toggleSplash = !json.has("toggleSplash") || json.getAsJsonPrimitive("toggleSplash").getAsBoolean();
             ChristmasConfig.toggleSnow = !json.has("toggleSnow") || json.getAsJsonPrimitive("toggleSnow").getAsBoolean();
             ChristmasConfig.customBg = !json.has("customBg") || json.getAsJsonPrimitive("customBg").getAsBoolean();
-            ChristmasConfig.customBgPath = json.has("customBgPath") ? json.getAsJsonPrimitive("bg").getAsString() : "";
+            ChristmasConfig.customBgPath = json.has("customBgPath") ? json.getAsJsonPrimitive("customBgPath").getAsString() : "";
+            ChristmasConfig.buttonOutline = !json.has("buttonOutline") || json.getAsJsonPrimitive("buttonOutline").getAsBoolean();
 
             scanner.close();
             ChristmasX.logger.info("Loaded config!");
